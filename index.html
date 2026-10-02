@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop Khởi Nghiệp Pharmesthetic - Bứt Phá Doanh Thu Spa</title>
+  <meta name="description" content="Workshop Khởi nghiệp Pharmesthetic dành cho chủ Spa và người kinh doanh mỹ phẩm. Ngày 13/10 tại Pharmeshub Xuân Đỉnh, Hà Nội với Mentor Quỳnh Trang & Ngô Mai Phương.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#38bdf8',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            },
+            accent: {
+              gold: '#f59e0b',
+              dark: '#050811'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-sky-500 selection:text-slate-950">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div>
+          <span class="text-xl font-black tracking-wider text-white block leading-tight hover:text-sky-400 transition-colors">PHARMESTHETIC</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+        <a href="#about" class="hover:text-sky-400 transition-colors">Về Nhãn Hàng</a>
+        <a href="#mentors" class="hover:text-sky-400 transition-colors">Mentors</a>
+        <a href="#packages" class="hover:text-sky-400 transition-colors">Gói Hợp Tác</a>
+        <a href="#register" class="hover:text-sky-400 transition-colors">Đăng Ký</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <a href="#register" class="inline-flex items-center gap-2 text-xs font-black px-5 py-2.5 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 hover:from-sky-300 hover:to-cyan-300 transition-all shadow-lg shadow-sky-500/20">
+          <span>Đăng Ký Ngay</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN HERO SECTION -->
+  <section class="hero-bg-wrapper pt-32 pb-20 md:pt-40 md:pb-28 relative">
+    <div class="hero-overlay absolute inset-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Top Pills Info Bar -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+        <div class="pill-badge text-sky-300 border-sky-500/40">
+          <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+          Workshop Trực Tiếp
+        </div>
+        <div class="pill-badge">
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-sky-400"></i>
+          13/10 | 13h30 - 17h00
+        </div>
+        <div class="pill-badge">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-400"></i>
+          Pharmeshub - Xuân Đỉnh, Hà Nội
+        </div>
+        <div class="pill-badge text-amber-300 border-amber-500/40">
+          <i data-lucide="ticket" class="w-3.5 h-3.5 text-amber-400"></i>
+          Mức Phí: Miễn Phí (Số lượng giới hạn)
+        </div>
+      </div>
+
+      <!-- Main Banner Titles -->
+      <div class="text-center max-w-4xl mx-auto mb-12">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.15] mb-6 drop-shadow-md">
+          WORKSHOP KHỞI NGHIỆP <br class="hidden sm:inline" />
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-300 via-cyan-200 to-teal-300">
+            PHARMESTHETIC
+          </span>
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-200 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
+          Giải pháp đột phá doanh thu Spa & chiến lược xây dựng thương hiệu Dược Mỹ Phẩm hàng đầu dành riêng cho <span class="text-white font-bold underline decoration-sky-400 decoration-2">Chủ Spa</span> và <span class="text-white font-bold underline decoration-sky-400 decoration-2">Người Kinh Doanh Mỹ Phẩm</span>.
+        </p>
+      </div>
+
+      <!-- Countdown Timer Component -->
+      <div class="max-w-2xl mx-auto mb-14">
+        <div class="glass-card-dark p-6 sm:p-8 text-center border border-sky-500/30">
+          <p class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-4">Sự kiện bắt đầu sau</p>
+          <div class="grid grid-cols-4 gap-3 sm:gap-6">
+            <div class="bg-slate-900/90 rounded-2xl p-3 sm:p-4 shadow-sm border border-slate-800">
+              <span id="days" class="text-2xl sm:text-4xl font-black text-white block">00</span>
+              <span class="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase">Ngày</span>
+            </div>
+            <div class="bg-slate-900/90 rounded-2xl p-3 sm:p-4 shadow-sm border border-slate-800">
+              <span id="hours" class="text-2xl sm:text-4xl font-black text-white block">00</span>
+              <span class="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase">Giờ</span>
+            </div>
+            <div class="bg-slate-900/90 rounded-2xl p-3 sm:p-4 shadow-sm border border-slate-800">
+              <span id="minutes" class="text-2xl sm:text-4xl font-black text-white block">00</span>
+              <span class="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase">Phút</span>
+            </div>
+            <div class="bg-slate-900/90 rounded-2xl p-3 sm:p-4 shadow-sm border border-slate-800">
+              <span id="seconds" class="text-2xl sm:text-4xl font-black text-sky-400 block">00</span>
+              <span class="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase">Giây</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2: BRAND / NHÃN HÀNG PHARMESTHETIC & PHARMESPOT -->
+  <section id="about" class="py-20 bg-slate-950/90 relative overflow-hidden border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 space-y-6">
+          <div class="pill-badge text-sky-300 bg-sky-950/60 border-sky-500/30">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-sky-400"></i>
+            Thương Hiệu Dược Mỹ Phẩm Hàng Đầu
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+            Pharmespot - Trung Tâm Chăm Sóc Da Bí Ẩn & Đa Dạng
+          </h2>
+          
+          <div class="space-y-4 text-slate-300 text-sm leading-relaxed">
+            <p>
+              Một trung tâm chăm sóc da đầy bí ẩn và đa dạng, giải quyết các vấn đề về da được thể hiện bởi cơ thể và tâm trí của những người hiện đại, <strong class="text-sky-300">Pharmespot</strong>.
+            </p>
+            <p>
+              <strong class="text-sky-300">Pharmespot</strong> là cửa hàng hàng đầu của Pharmesthetic, phân phối thương hiệu <em>Dermaskin Cylocology</em> được sử dụng tại hơn <strong class="text-white">4.000 trung tâm chuyên khoa da liễu</strong> trên toàn quốc.
+            </p>
+            <p>
+              Ở đây, các vấn đề về da của những người hiện đại không chỉ được coi là một cơ quan bảo vệ, mà còn được giải thích là căng thẳng tâm lý xuất hiện trong nhiều môi trường ô nhiễm và cạnh tranh gay gắt, và được lan truyền như một vấn đề xã hội.
+            </p>
+            <p class="text-sky-200 font-medium italic border-l-2 border-sky-400 pl-3 py-1">
+              "Bắt đầu của các vấn đề về da đến từ tâm trí, và phương pháp chữa trị bắt đầu với buổi chăm sóc da đúng và thư giãn tâm lý bởi một bác sĩ da liễu."
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
+              <div class="p-2.5 rounded-xl bg-sky-950 text-sky-400 border border-sky-500/20">
+                <i data-lucide="building" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">4.000+ Trung Tâm</h4>
+                <p class="text-xs text-slate-400 mt-1">Phân phối thương hiệu Dermaskin Cylocology toàn quốc</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
+              <div class="p-2.5 rounded-xl bg-teal-950 text-teal-400 border border-teal-500/20">
+                <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">Chữa Lành & Thư Giãn</h4>
+                <p class="text-xs text-slate-400 mt-1">Kết hợp liệu trình da liễu & thư giãn tâm trí</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-sky-500/30 group">
+            <img src="public/images/pharmespot_center.jpg" alt="Pharmespot Flagship Center" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex items-end p-8">
+              <div class="text-white">
+                <p class="text-xs font-bold text-sky-400 uppercase tracking-widest">Flagship Center Pharmesthetic</p>
+                <h3 class="text-xl font-bold mt-1">Pharmespot - Trung tâm nghệ thuật chăm sóc da liễu</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: MENTORS SHOWCASE -->
+  <section id="mentors" class="py-20 bg-slate-900/70 relative border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="pill-badge mb-3 text-sky-300 border-sky-500/30">Đội Ngũ Diễn Giả & Master</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+          Đồng Hành Cùng 2 Mentors Hàng Đầu Ngành Spa
+        </h2>
+        <p class="text-slate-300 mt-3">
+          Học hỏi trực tiếp từ những chuyên gia có nhiều năm kinh nghiệm thực chiến trong điều trị da liễu và phát triển chuỗi Spa.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- MENTOR QUỲNH TRANG -->
+        <div class="glass-card p-8 flex flex-col md:flex-row gap-6 items-center md:items-start border border-slate-700/60">
+          <div class="w-48 h-64 sm:w-52 sm:h-72 rounded-2xl overflow-hidden shadow-xl shrink-0 border-2 border-sky-500/30 bg-slate-900">
+            <img src="public/images/mentor_quynh_trang_user_v4.jpg" alt="Mentor Quỳnh Trang" class="w-full h-full object-cover object-center">
+          </div>
+          <div class="space-y-3 text-center md:text-left flex-1">
+            <div class="inline-block px-3 py-1 rounded-full bg-sky-950 text-sky-300 border border-sky-500/30 font-bold text-xs">
+              8 Năm Kinh Nghiệm Thẩm Mỹ Da Liễu
+            </div>
+            <h3 class="text-2xl font-extrabold text-white">Mentor Quỳnh Trang</h3>
+            <p class="text-xs font-semibold text-sky-400 uppercase tracking-wider">
+              Cố Vấn Chuyên Môn Thẩm Mỹ Da Liễu & Vận Hành Spa
+            </p>
+            
+            <p class="text-sky-300 text-sm italic border-l-2 border-sky-400 pl-3 py-0.5 my-1">
+              "Kinh doanh chuyên môn là kinh doanh tạo giá trị bền vững"
+            </p>
+
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Hơn 8 năm kinh nghiệm trong lĩnh vực thẩm mỹ da liễu và trực tiếp điều hành Spa. Đã xử lý hàng ngàn case da phức tạp và hỗ trợ chuyên môn cho hàng loạt chủ Spa toàn quốc.
+            </p>
+
+            <!-- Achievements list -->
+            <div class="bg-slate-900/90 rounded-xl p-4 border border-slate-800 space-y-2 text-xs font-semibold text-slate-200">
+              <div class="flex items-center gap-2">
+                <i data-lucide="award" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                <span>Top 1 Master of the Year Pharmesthetic</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-sky-400 shrink-0"></i>
+                <span>Top 1 Clinical Reviewer Pharmesthetic</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="star" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                <span>Kiến tạo Mentee Top 1 Superjection</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MENTOR NGÔ MAI PHƯƠNG -->
+        <div class="glass-card p-8 flex flex-col md:flex-row gap-6 items-center md:items-start border border-slate-700/60">
+          <div class="w-48 h-64 sm:w-52 sm:h-72 rounded-2xl overflow-hidden shadow-xl shrink-0 border-2 border-sky-500/30 bg-slate-900">
+            <img src="public/images/mentor_ngo_mai_phuong_user.jpg" alt="Mentor Ngô Mai Phương" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-3 text-center md:text-left flex-1">
+            <div class="inline-block px-3 py-1 rounded-full bg-slate-800 text-slate-200 font-bold text-xs">
+              10 Năm Kinh Nghiệm Thẩm Mỹ Da Liễu
+            </div>
+            <h3 class="text-2xl font-extrabold text-white">Mentor Ngô Mai Phương</h3>
+            <p class="text-xs font-semibold text-sky-400 uppercase tracking-wider">
+              Strategic Mentor & Chuyên Gia Đào Tạo Chuyên Môn Spa
+            </p>
+            
+            <p class="text-sky-300 text-sm italic border-l-2 border-sky-400 pl-3 py-0.5 my-1">
+              "Đừng chạy theo xu hướng. Hãy là người tạo ra sân chơi của riêng mình."
+            </p>
+
+            <p class="text-slate-300 text-sm leading-relaxed">
+              10 năm kinh nghiệm thẩm mỹ da liễu và vận hành Spa chuyên nghiệp. Đã đào tạo chuyên môn chuẩn y khoa cho hàng trăm chủ spa, xây dựng tư duy kinh doanh đột phá.
+            </p>
+
+            <!-- Achievements list -->
+            <div class="bg-slate-900/90 rounded-xl p-4 border border-slate-800 space-y-2 text-xs font-semibold text-slate-200">
+              <div class="flex items-center gap-2">
+                <i data-lucide="trophy" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                <span>Top 1 Master Phát Triển Mentee</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="users" class="w-4 h-4 text-sky-400 shrink-0"></i>
+                <span>Đào tạo hơn 500+ Chủ Spa phát triển chuỗi thành công</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="target" class="w-4 h-4 text-rose-400 shrink-0"></i>
+                <span>Chuyên gia quy trình chốt Sale & Chăm sóc khách hàng</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4: COOPERATION PACKAGES (GÓI HỢP TÁC) -->
+  <section id="packages" class="py-20 bg-slate-950/90 relative border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="pill-badge mb-3 text-amber-300 border-amber-500/40">Gói Hợp Tác & Quyền Lợi</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+          Lựa Chọn Mô Hình Hợp Tác Phù Hợp
+        </h2>
+        <p class="text-slate-300 mt-3">
+          Tối ưu chi phí đầu tư với 3 gói hợp tác linh hoạt được thiết kế dành riêng cho từng quy mô kinh doanh.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- CARD 1: AFFILIATE -->
+        <div class="glass-card package-card p-8 flex flex-col justify-between border border-slate-700/80" data-package="Gói Affiliate">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Dành cho người mới</div>
+            <h3 class="text-2xl font-black text-white mb-2">Affiliate</h3>
+            <p class="text-slate-400 text-sm mb-6">Bắt đầu kinh doanh mỹ phẩm online/offline với chi phí tối ưu.</p>
+            
+            <div class="text-3xl font-black text-white mb-6">
+              Hợp Tác Khởi Nghiệp
+            </div>
+
+            <ul class="space-y-4 text-sm text-slate-200">
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-sky-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-white">Training sản phẩm:</strong> Đào tạo kiến thức sản phẩm chuyên sâu Pharmesthetic</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-sky-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-sky-300 font-bold">K1 • Content để khách mới tin và hỏi mua mỹ phẩm</strong></span>
+              </li>
+            </ul>
+          </div>
+
+          <button class="pill-button mt-8">
+            Chọn Gói Affiliate
+          </button>
+        </div>
+
+        <!-- CARD 2: LITTLE MASTER (15 Triệu) -->
+        <div class="glass-card package-card p-8 flex flex-col justify-between border-2 border-sky-500/60 shadow-xl relative" data-package="Gói Little Master (15 triệu)">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-sky-500 text-slate-950 text-[11px] font-black uppercase tracking-wider px-4 py-1 rounded-full shadow">
+            Phổ Biến Nhất Cho Spa
+          </div>
+
+          <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-sky-400 mb-2">Chủ Spa Khởi Nghiệp</div>
+            <h3 class="text-2xl font-black text-white mb-2">Little Master</h3>
+            <p class="text-slate-400 text-sm mb-6">Nâng cấp phác đồ & gia tăng doanh số phòng khám/spa.</p>
+            
+            <div class="text-3xl font-black text-sky-400 mb-6">
+              15.000.000 <span class="text-base font-semibold text-slate-400">VNĐ</span>
+            </div>
+
+            <ul class="space-y-4 text-sm text-slate-200">
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-sky-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-white">Training sản phẩm chuyên sâu</strong></span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-sky-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-white">Support phác đồ:</strong> Hỗ trợ chuẩn hóa phác đồ điều trị Y Khoa</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-sky-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-sky-300 font-bold">K1 • Content để khách mới tin và hỏi mua mỹ phẩm</strong></span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-sky-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-sky-300 font-bold">K2 • Tư vấn sản phẩm giá trị cao</strong></span>
+              </li>
+            </ul>
+          </div>
+
+          <button class="pill-button mt-8">
+            Đăng Ký Little Master
+          </button>
+        </div>
+
+        <!-- CARD 3: MASTER (30 Triệu) -->
+        <div class="glass-card package-card p-8 flex flex-col justify-between border-2 border-amber-500/60 bg-amber-950/20" data-package="Gói Master (30 triệu)">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-2">Hệ Thống & Spa Leader</div>
+            <h3 class="text-2xl font-black text-white mb-2">Master</h3>
+            <p class="text-slate-400 text-sm mb-6">Gói đồng hành toàn diện 1:1 từ phác đồ đến giữ chân khách hàng.</p>
+            
+            <div class="text-3xl font-black text-amber-400 mb-6">
+              30.000.000 <span class="text-base font-semibold text-slate-400">VNĐ</span>
+            </div>
+
+            <ul class="space-y-3.5 text-sm text-slate-200">
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-white">Training sản phẩm chuyên sâu</strong></span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-white">Support phác đồ Y Khoa chuẩn quốc tế</strong></span>
+              </li>
+              <li class="flex items-start gap-3 bg-amber-950/80 p-2.5 rounded-xl border border-amber-500/40">
+                <i data-lucide="star" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+                <span class="text-xs font-bold text-amber-200">Support trực tiếp case da khách hàng trong 1 tháng</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-amber-300 font-bold">K1 • Content để khách mới tin và hỏi mua mỹ phẩm</strong></span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-amber-300 font-bold">K2 • Tư vấn sản phẩm giá trị cao</strong></span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+                <span><strong class="text-amber-300 font-bold">K3 • Chăm khách sau mua và phát triển khách giới thiệu</strong></span>
+              </li>
+            </ul>
+          </div>
+
+          <button class="pill-button mt-8">
+            Đăng Ký Master (30 Tr)
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5: CLINIC SPACE & LOCATION GRID -->
+  <section id="space" class="py-20 bg-slate-900/70 relative border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="pill-badge mb-3 text-sky-300 border-sky-500/30">Location & Directions</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white">Địa Điểm Tổ Chức Workshop</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">
+          Pharmeshub Hà Nội - Nơi diễn ra chương trình đào tạo & chuyển giao giải pháp Khởi nghiệp Pharmesthetic.
+        </p>
+      </div>
+
+      <!-- Centered Location Card & Map -->
+      <div class="max-w-3xl mx-auto glass-card p-6 sm:p-8 border border-slate-700/60">
+        <div class="mb-6 text-center sm:text-left">
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-rose-400 uppercase tracking-wider mb-2">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+            <span>Địa điểm Workshop</span>
+          </div>
+          <h3 class="text-2xl font-extrabold text-white mb-2">Pharmeshub Hà Nội</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Liền kề C02, Chung cư 789 Xuân Đỉnh, P. Xuân Đỉnh, Q. Bắc Từ Liêm, Hà Nội.
+          </p>
+        </div>
+
+        <!-- Interactive Map Frame -->
+        <div class="rounded-2xl overflow-hidden border border-slate-700 h-72 sm:h-80 bg-slate-900 relative shadow-inner">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.473877969308!2d105.7876873153898!3d21.0537249923019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab2f6c91e84b%3A0x6b8f3cfb06b24d78!2zNzg5IFh1w6JuIMSQ4buJbmgsIFAuIFh1w6JuIMSQ4buJbmgsIELhuq9jIFThu6sgTGnDqm0sIEjDoCBO4buZaQ!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" 
+            class="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-300" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 6: FORM ĐĂNG KÝ -->
+  <section id="register" class="footer-bg-wrapper py-24 relative border-t border-slate-800/80">
+    <div class="footer-overlay absolute inset-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Registration Card Container -->
+      <div class="max-w-xl mx-auto glass-card-dark p-8 sm:p-12 text-white border border-sky-500/40">
+        
+        <div class="text-center mb-8">
+          <span class="text-xs font-bold uppercase tracking-widest text-sky-400 block mb-2">Đăng ký tham dự Workshop</span>
+          <h2 class="text-3xl font-extrabold text-white">Khởi Đầu Hành Trình Ngay Hôm Nay</h2>
+          <p class="text-slate-300 text-sm mt-2">
+            Điền thông tin bên dưới để Ban Tổ Chức Pharmesthetic gửi mã vé mời tham dự qua Telegram/Zalo.
+          </p>
+        </div>
+
+        <!-- Form Elements -->
+        <form id="registration-form" class="space-y-4">
+          
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 ml-2">Họ và tên</label>
+            <input type="text" id="form-name" placeholder="Ví dụ: Nguyễn Thu Hà" required class="pill-input">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 ml-2">Số điện thoại (Zalo)</label>
+            <input type="tel" id="form-phone" placeholder="Ví dụ: 0987 654 321" required class="pill-input">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 ml-2">Mô hình kinh doanh của bạn</label>
+            <select id="form-role" class="pill-input pill-select">
+              <option value="Chủ Spa / Thẩm Mỹ Viện">Chủ Spa / Thẩm Mỹ Viện</option>
+              <option value="Người Kinh Doanh Mỹ Phẩm">Người Kinh Doanh Mỹ Phẩm</option>
+              <option value="Bác Sĩ / KTV Da Liễu">Bác Sĩ / KTV Da Liễu</option>
+              <option value="Muốn Khởi Nghiệp Ngành Làm Đẹp">Muốn Khởi Nghiệp Ngành Làm Đẹp</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 ml-2">Gói hợp tác quan tâm</label>
+            <select id="form-package" class="pill-input pill-select">
+              <option value="Đăng ký tham gia Workshop (Miễn Phí)">Đăng ký tham gia Workshop (Miễn Phí)</option>
+              <option value="Gói Affiliate">Gói Affiliate (Training + Khóa K1 Content)</option>
+              <option value="Gói Little Master (15 triệu)">Gói Little Master 15 triệu (Training + Support Phác Đồ + K1 + K2 Sale)</option>
+              <option value="Gói Master (30 triệu)">Gói Master 30 triệu (Training + Support 1-1 + Case 1 Tháng + K1+K2+K3)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 ml-2">Ghi chú thêm (Nếu có)</label>
+            <input type="text" id="form-note" placeholder="Ví dụ: Cần tư vấn thêm gói Master 30tr..." class="pill-input">
+          </div>
+
+          <div class="pt-4">
+            <button type="submit" id="submit-btn" class="pill-button font-black text-base transition-all transform active:scale-95 shadow-xl">
+              Đăng Ký Tham Gia Ngay ✨
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="text-sm font-bold text-white tracking-wide">Workshop Khởi Nghiệp Pharmesthetic</span>
+      </div>
+      <p class="text-xs text-slate-500">
+        © Pharmesthetic Hub. All rights reserved. | Pharmeshub Hà Nội
+      </p>
+    </div>
+  </footer>
+
+  <!-- TELEGRAM CONFIG MODAL -->
+  <div id="tg-config-modal" class="modal-backdrop">
+    <div class="modal-content glass-card-dark max-w-md w-full p-6 sm:p-8 m-4 text-white">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <i data-lucide="send" class="w-5 h-5 text-sky-400"></i>
+          Cấu Hình Telegram Bot
+        </h3>
+        <button id="close-tg-config" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+        Nhập <strong class="text-sky-300">Bot Token</strong> và <strong class="text-sky-300">Chat ID</strong> Telegram của bạn để nhận thông tin khách hàng đăng ký trực tiếp về điện thoại/nhóm Telegram.
+      </p>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Telegram Bot Token</label>
+          <input type="text" id="tg-bot-token" placeholder="Ví dụ: 123456789:ABCdefGHIjklMNOpqrs..." class="pill-input text-xs">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Telegram Chat ID (hoặc Group ID)</label>
+          <input type="text" id="tg-chat-id" placeholder="Ví dụ: 987654321 hoặc -10012345678" class="pill-input text-xs">
+        </div>
+
+        <div id="tg-config-status" class="text-xs py-1"></div>
+
+        <div class="flex gap-2 pt-2">
+          <button id="test-tg-config" class="w-1/2 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700">
+            Gửi Thử Tin Nhắn
+          </button>
+          <button id="save-tg-config" class="w-1/2 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs">
+            Lưu Cấu Hình
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div id="success-modal" class="modal-backdrop">
+    <div class="modal-content glass-card-dark max-w-md w-full p-8 m-4 text-center text-white">
+      <div class="w-16 h-16 rounded-full bg-sky-950 text-sky-400 border border-sky-500/30 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="check" class="w-8 h-8 stroke-[3]"></i>
+      </div>
+      <h3 class="text-2xl font-extrabold text-white mb-2">Đăng Ký Thành Công!</h3>
+      <div id="success-details" class="text-sm text-slate-300 mb-6 leading-relaxed"></div>
+      <button onclick="closeSuccessModal()" class="pill-button">
+        Hoàn Tất
+      </button>
+    </div>
+  </div>
+
+  <!-- VIDEO PREVIEW MODAL -->
+  <div id="video-modal" class="modal-backdrop">
+    <div class="modal-content max-w-3xl w-full p-4 relative">
+      <button id="close-video" class="absolute -top-10 right-0 text-white hover:text-slate-300">
+        <i data-lucide="x" class="w-8 h-8"></i>
+      </button>
+      <div class="aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl">
+        <iframe id="video-iframe" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Script -->
+  <script src="js/app.js"></script>
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
