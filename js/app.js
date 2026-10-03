@@ -193,7 +193,7 @@ function showSuccessModal(name, phone, packageType, sentToTg) {
       <p>Cảm ơn <strong>${name}</strong> (${phone})!</p>
       <p class="mt-1">Bạn đã đăng ký tham gia với lựa chọn: <span class="text-teal-600 font-bold">${packageType}</span></p>
       <p class="mt-2 text-xs text-slate-500">Ban tổ chức Pharmesthetic sẽ liên hệ xác nhận vé tham dự trong thời gian sớm nhất.</p>
-      ${sentToTg ? '<p class="mt-2 text-xs text-emerald-600 font-medium">✓ Đã chuyển tiếp thông tin đăng ký về Telegram Ban Tổ Chức!</p>' : ''}
+      <p class="mt-2 text-xs text-emerald-600 font-medium">✓ Thông tin đăng ký đã được ghi nhận thành công!</p>
     `;
   }
 

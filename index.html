@@ -492,7 +492,7 @@
           <span class="text-xs font-bold uppercase tracking-widest text-sky-400 block mb-2">Đăng ký tham dự Workshop</span>
           <h2 class="text-3xl font-extrabold text-white">Khởi Đầu Hành Trình Ngay Hôm Nay</h2>
           <p class="text-slate-300 text-sm mt-2">
-            Điền thông tin bên dưới để Ban Tổ Chức Pharmesthetic gửi mã vé mời tham dự qua Telegram/Zalo.
+            Điền thông tin bên dưới để Ban Tổ Chức Pharmesthetic gửi mã vé mời tham dự xác nhận.
           </p>
         </div>
 
@@ -559,47 +559,7 @@
     </div>
   </footer>
 
-  <!-- TELEGRAM CONFIG MODAL -->
-  <div id="tg-config-modal" class="modal-backdrop">
-    <div class="modal-content glass-card-dark max-w-md w-full p-6 sm:p-8 m-4 text-white">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <i data-lucide="send" class="w-5 h-5 text-sky-400"></i>
-          Cấu Hình Telegram Bot
-        </h3>
-        <button id="close-tg-config" class="text-slate-400 hover:text-white p-1">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
 
-      <p class="text-xs text-slate-300 mb-4 leading-relaxed">
-        Nhập <strong class="text-sky-300">Bot Token</strong> và <strong class="text-sky-300">Chat ID</strong> Telegram của bạn để nhận thông tin khách hàng đăng ký trực tiếp về điện thoại/nhóm Telegram.
-      </p>
-
-      <div class="space-y-3">
-        <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">Telegram Bot Token</label>
-          <input type="text" id="tg-bot-token" placeholder="Ví dụ: 123456789:ABCdefGHIjklMNOpqrs..." class="pill-input text-xs">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">Telegram Chat ID (hoặc Group ID)</label>
-          <input type="text" id="tg-chat-id" placeholder="Ví dụ: 987654321 hoặc -10012345678" class="pill-input text-xs">
-        </div>
-
-        <div id="tg-config-status" class="text-xs py-1"></div>
-
-        <div class="flex gap-2 pt-2">
-          <button id="test-tg-config" class="w-1/2 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700">
-            Gửi Thử Tin Nhắn
-          </button>
-          <button id="save-tg-config" class="w-1/2 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs">
-            Lưu Cấu Hình
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- SUCCESS MODAL -->
   <div id="success-modal" class="modal-backdrop">
