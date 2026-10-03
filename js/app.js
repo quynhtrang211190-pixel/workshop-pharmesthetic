@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initVideoModals();
 });
 
-// Default Telegram Config state (stored in localStorage)
+// Default Telegram Config state (stored in localStorage or built-in default)
 const DEFAULT_TELEGRAM = {
-  botToken: localStorage.getItem('tg_bot_token') || '',
-  chatId: localStorage.getItem('tg_chat_id') || ''
+  botToken: localStorage.getItem('tg_bot_token') || '8652720930:AAFqGwAaAwWjPEaKzPzjQOHCqsixgsy_n_M',
+  chatId: localStorage.getItem('tg_chat_id') || '7960159367'
 };
 
 function initTelegramConfig() {
@@ -153,8 +153,8 @@ function initFormHandler() {
 <i>Tin nhắn tự động từ Landing Page Workshop Pharmesthetic</i>
     `.trim();
 
-    const token = localStorage.getItem('tg_bot_token');
-    const chat = localStorage.getItem('tg_chat_id');
+    const token = localStorage.getItem('tg_bot_token') || DEFAULT_TELEGRAM.botToken;
+    const chat = localStorage.getItem('tg_chat_id') || DEFAULT_TELEGRAM.chatId;
 
     let isSentToTelegram = false;
 
