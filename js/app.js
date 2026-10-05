@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPackageSelection();
   initCountdownTimer();
   initVideoModals();
+  initPageViewCounter();
 });
 
 // Default Telegram Config state (stored in localStorage or built-in default)
@@ -314,4 +315,23 @@ function showToast(message, type = 'info') {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 3500);
+}
+
+// Page View Counter (Starts from 20)
+function initPageViewCounter() {
+  const viewsEl = document.getElementById('page-views-count');
+  if (!viewsEl) return;
+
+  const storageKey = 'pharmesthetic_page_views';
+  let currentViews = parseInt(localStorage.getItem(storageKey) || '20', 10);
+  
+  if (isNaN(currentViews) || currentViews < 20) {
+    currentViews = 20;
+  }
+  
+  // Increment view count for each visit
+  currentViews += 1;
+  localStorage.setItem(storageKey, currentViews);
+
+  viewsEl.innerText = currentViews.toLocaleString('vi-VN');
 }
