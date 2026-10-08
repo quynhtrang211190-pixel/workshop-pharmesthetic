@@ -113,6 +113,7 @@ function initFormHandler() {
 
     const fullName = document.getElementById('form-name').value.trim();
     const phone = document.getElementById('form-phone').value.trim();
+    const socialLink = document.getElementById('form-social')?.value.trim() || 'Không cung cấp';
     const role = document.getElementById('form-role').value;
     const packageType = document.getElementById('form-package').value;
     const note = document.getElementById('form-note')?.value.trim() || 'Không có';
@@ -145,6 +146,7 @@ function initFormHandler() {
 ━━━━━━━━━━━━━━━━━━━━━━
 👤 <b>Họ và tên:</b> ${fullName}
 📞 <b>Số điện thoại:</b> <code>${phone}</code>
+🌐 <b>Link FB/Zalo:</b> ${socialLink}
 💼 <b>Mô hình:</b> ${role}
 📦 <b>Gói quan tâm:</b> <b>${packageType}</b>
 📝 <b>Ghi chú:</b> ${note}
