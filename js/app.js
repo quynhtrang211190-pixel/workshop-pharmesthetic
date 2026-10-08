@@ -149,7 +149,7 @@ function initFormHandler() {
 📦 <b>Gói quan tâm:</b> <b>${packageType}</b>
 📝 <b>Ghi chú:</b> ${note}
 ⏰ <b>Thời gian ĐK:</b> ${now}
-📍 <b>Sự kiện:</b> Workshop Khởi nghiệp Pharmesthetic (13/10)
+📍 <b>Sự kiện:</b> Workshop Khởi nghiệp Pharmesthetic (21/10)
 ━━━━━━━━━━━━━━━━━━━━━━
 <i>Tin nhắn tự động từ Landing Page Workshop Pharmesthetic</i>
     `.trim();
@@ -232,15 +232,15 @@ function initPackageSelection() {
   });
 }
 
-// Countdown Timer for Oct 13, 13:30
+// Countdown Timer for Oct 21, 13:30
 function initCountdownTimer() {
-  // Target: Oct 13, 13:30
+  // Target: Oct 21, 13:30
   const now = new Date();
   let targetYear = now.getFullYear();
-  let targetDate = new Date(`${targetYear}-10-13T13:30:00+07:00`);
+  let targetDate = new Date(`${targetYear}-10-21T13:30:00+07:00`);
 
   if (now > targetDate) {
-    targetDate = new Date(`${targetYear + 1}-10-13T13:30:00+07:00`);
+    targetDate = new Date(`${targetYear + 1}-10-21T13:30:00+07:00`);
   }
 
   function update() {
