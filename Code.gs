@@ -18,8 +18,15 @@
 // ==============================================================================
 
 const CONFIG = {
+  // 1. Tên sheet lưu dữ liệu (mặc định tự tạo nếu chưa có)
   SHEET_NAME: 'Đăng Ký Workshop',
-  // Cấu hình bot Telegram nhận thông báo tức thì khi có người đăng ký
+
+  // 2. (Tùy chọn) ID của Google Sheet:
+  // - Nếu bạn mở Apps Script từ menu 'Tiện ích mở rộng > Apps Script' trong Google Sheet: ĐỂ NGUYÊN RỖNG (tự động nhận).
+  // - Nếu tạo Apps Script độc lập tại script.google.com: Dán ID trang tính vào đây (Lấy từ URL: docs.google.com/spreadsheets/d/{ID}/edit).
+  SPREADSHEET_ID: '',
+
+  // 3. Cấu hình bot Telegram nhận thông báo tức thì khi có người đăng ký
   TELEGRAM_BOT_TOKEN: '8652720930:AAFqGwAaAwWjPEaKzPzjQOHCqsixgsy_n_M',
   TELEGRAM_CHAT_ID: '7960159367'
 };
@@ -30,14 +37,14 @@ const CONFIG = {
 function doPost(e) {
   try {
     let data = {};
-    if (e.postData && e.postData.contents) {
+    if (e && e.postData && e.postData.contents) {
       try {
         data = JSON.parse(e.postData.contents);
       } catch (err) {
         data = e.parameter || {};
       }
-    } else {
-      data = e.parameter || {};
+    } else if (e && e.parameter) {
+      data = e.parameter;
     }
 
     const result = handleWorkshopRegistration(data);
@@ -78,7 +85,28 @@ function handleWorkshopRegistration(data) {
   const note = data.note || 'Không có';
   const source = data.source || 'Landing Page Workshop Pharmesthetic';
 
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let ss = null;
+  try {
+    ss = SpreadsheetApp.getActiveSpreadsheet();
+  } catch (err) {
+    Logger.log("Không có active spreadsheet: " + err.message);
+  }
+
+  if (!ss && CONFIG.SPREADSHEET_ID && CONFIG.SPREADSHEET_ID.trim() !== '') {
+    try {
+      ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID.trim());
+    } catch (err) {
+      Logger.log("Không thể mở Sheet bằng SPREADSHEET_ID: " + err.message);
+    }
+  }
+
+  if (!ss) {
+    return {
+      success: false,
+      error: "Chưa kết nối được với Google Sheet. Vui lòng kiểm tra lại quyền truy cập hoặc điền SPREADSHEET_ID nếu dùng Apps Script độc lập."
+    };
+  }
+
   let sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
   
   // Nếu chưa có sheet, tự động tạo và định dạng hàng tiêu đề đẹp mắt
