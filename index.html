@@ -559,13 +559,61 @@
       <div class="flex items-center gap-3">
         <span class="text-sm font-bold text-white tracking-wide">Workshop Khởi Nghiệp Pharmesthetic</span>
       </div>
-      <p class="text-xs text-slate-500">
+      <p id="admin-secret-trigger" class="text-xs text-slate-500 cursor-pointer select-none" title="Nhấp 3 lần để mở cấu hình">
         © Pharmesthetic Hub. All rights reserved. | Pharmeshub Premium Clinic
       </p>
     </div>
   </footer>
 
+  <!-- ADMIN CONFIG MODAL (Mở khi vào ?admin=1 hoặc nhấp 3 lần vào chân trang) -->
+  <div id="admin-config-modal" class="modal-backdrop">
+    <div class="modal-content glass-card-dark max-w-lg w-full p-6 sm:p-8 m-4 text-white">
+      <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="settings" class="w-5 h-5 text-sky-400"></i>
+          <h3 class="text-lg font-bold text-white">Cấu Hình Kết Nối Dữ Liệu</h3>
+        </div>
+        <button id="close-admin-config" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
 
+      <div class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-sky-400 mb-1">1. URL Web App Google Apps Script / Google Form</label>
+          <input type="url" id="cfg-google-url" placeholder="https://script.google.com/macros/s/.../exec" class="pill-input text-xs">
+          <p class="text-[11px] text-slate-400 mt-1">Dán URL Web App triển khai từ file <code>Code.gs</code> hoặc link biểu mẫu Google Form.</p>
+        </div>
+
+        <div>
+          <label class="block font-bold text-sky-400 mb-1">2. (Tùy chọn) Link Google Form trực tiếp</label>
+          <input type="url" id="cfg-google-form-direct" placeholder="https://forms.gle/... hoặc https://docs.google.com/forms/..." class="pill-input text-xs">
+          <p class="text-[11px] text-slate-400 mt-1">Nếu có, sau khi đăng ký thành công sẽ có nút dẫn khách mở xem Google Form của Workshop.</p>
+        </div>
+
+        <div class="pt-2 border-t border-slate-800">
+          <label class="block font-bold text-slate-300 mb-1">Telegram Bot Token (Thông báo tức thì)</label>
+          <input type="text" id="cfg-tg-token" class="pill-input text-xs font-mono">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Telegram Chat ID</label>
+          <input type="text" id="cfg-tg-chat" class="pill-input text-xs font-mono">
+        </div>
+
+        <div id="cfg-status-message" class="text-xs min-h-[1.25rem]"></div>
+
+        <div class="flex items-center gap-3 pt-3">
+          <button type="button" id="btn-test-connection" class="w-1/2 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-sky-400 font-bold border border-slate-700 transition">
+            Gửi Thử Nghiệm 🧪
+          </button>
+          <button type="button" id="btn-save-admin-config" class="w-1/2 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold transition">
+            Lưu Cấu Hình 💾
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- SUCCESS MODAL -->
   <div id="success-modal" class="modal-backdrop">
@@ -575,6 +623,7 @@
       </div>
       <h3 class="text-2xl font-extrabold text-white mb-2">Đăng Ký Thành Công!</h3>
       <div id="success-details" class="text-sm text-slate-300 mb-6 leading-relaxed"></div>
+      <div id="google-form-link-container" class="mb-4 hidden"></div>
       <button onclick="closeSuccessModal()" class="pill-button">
         Hoàn Tất
       </button>

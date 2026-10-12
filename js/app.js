@@ -1,7 +1,7 @@
 // Application JS for Workshop Khởi nghiệp Pharmesthetic
 
 document.addEventListener('DOMContentLoaded', () => {
-  initTelegramConfig();
+  initAdminConfig();
   initFormHandler();
   initPackageSelection();
   initCountdownTimer();
@@ -9,80 +9,231 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageViewCounter();
 });
 
-// Default Telegram Config state (stored in localStorage or built-in default)
-const DEFAULT_TELEGRAM = {
-  botToken: localStorage.getItem('tg_bot_token') || '8652720930:AAFqGwAaAwWjPEaKzPzjQOHCqsixgsy_n_M',
-  chatId: localStorage.getItem('tg_chat_id') || '7960159367'
+// ============================================================
+// CẤU HÌNH GOOGLE FORM / APPS SCRIPT & TELEGRAM
+// ============================================================
+const DEFAULT_CONFIG = {
+  // 1. Telegram Notification Bot (Mặc định @Spamanagertool_bot)
+  tgBotToken: localStorage.getItem('tg_bot_token') || '8652720930:AAFqGwAaAwWjPEaKzPzjQOHCqsixgsy_n_M',
+  tgChatId: localStorage.getItem('tg_chat_id') || '7960159367',
+
+  // 2. Google Form / Google Apps Script Webhook URL
+  // Dán Web App URL triển khai từ Code.gs hoặc link Google Form
+  googleEndpointUrl: localStorage.getItem('ws_google_endpoint') || '',
+
+  // 3. Link Google Form trực tiếp (Nếu muốn hiển thị nút mở biểu mẫu sau khi đăng ký)
+  googleFormDirectUrl: localStorage.getItem('ws_google_form_url') || ''
 };
 
-function initTelegramConfig() {
-  const configBtn = document.getElementById('open-tg-config');
-  const modal = document.getElementById('tg-config-modal');
-  const closeBtn = document.getElementById('close-tg-config');
-  const saveBtn = document.getElementById('save-tg-config');
-  const testBtn = document.getElementById('test-tg-config');
+// Global helper for console configuration
+window.setWorkshopEndpoint = function(googleUrl, googleFormDirectUrl = '') {
+  if (googleUrl) localStorage.setItem('ws_google_endpoint', googleUrl.trim());
+  if (googleFormDirectUrl) localStorage.setItem('ws_google_form_url', googleFormDirectUrl.trim());
+  DEFAULT_CONFIG.googleEndpointUrl = googleUrl ? googleUrl.trim() : DEFAULT_CONFIG.googleEndpointUrl;
+  DEFAULT_CONFIG.googleFormDirectUrl = googleFormDirectUrl ? googleFormDirectUrl.trim() : DEFAULT_CONFIG.googleFormDirectUrl;
+  console.log('✅ Đã lưu Google Endpoint:', DEFAULT_CONFIG.googleEndpointUrl);
+  alert('Đã cập nhật cấu hình kết nối Google thành công!');
+};
 
-  const tokenInput = document.getElementById('tg-bot-token');
-  const chatInput = document.getElementById('tg-chat-id');
-  const statusEl = document.getElementById('tg-config-status');
+// ============================================================
+// ADMIN CONFIG MODAL LOGIC (Mở bằng ?admin=1 hoặc nhấp 3 lần footer)
+// ============================================================
+function initAdminConfig() {
+  const trigger = document.getElementById('admin-secret-trigger');
+  const modal = document.getElementById('admin-config-modal');
+  const closeBtn = document.getElementById('close-admin-config');
+  const saveBtn = document.getElementById('btn-save-admin-config');
+  const testBtn = document.getElementById('btn-test-connection');
 
-  // Load existing values into modal
-  if (tokenInput) tokenInput.value = DEFAULT_TELEGRAM.botToken;
-  if (chatInput) chatInput.value = DEFAULT_TELEGRAM.chatId;
+  const googleUrlInput = document.getElementById('cfg-google-url');
+  const googleFormDirectInput = document.getElementById('cfg-google-form-direct');
+  const tgTokenInput = document.getElementById('cfg-tg-token');
+  const tgChatInput = document.getElementById('cfg-tg-chat');
+  const statusEl = document.getElementById('cfg-status-message');
 
-  if (configBtn && modal) {
-    configBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      modal.classList.add('active');
+  function openModal() {
+    if (!modal) return;
+    if (googleUrlInput) googleUrlInput.value = localStorage.getItem('ws_google_endpoint') || DEFAULT_CONFIG.googleEndpointUrl;
+    if (googleFormDirectInput) googleFormDirectInput.value = localStorage.getItem('ws_google_form_url') || DEFAULT_CONFIG.googleFormDirectUrl;
+    if (tgTokenInput) tgTokenInput.value = localStorage.getItem('tg_bot_token') || DEFAULT_CONFIG.tgBotToken;
+    if (tgChatInput) tgChatInput.value = localStorage.getItem('tg_chat_id') || DEFAULT_CONFIG.tgChatId;
+    if (statusEl) statusEl.innerHTML = '';
+    modal.classList.add('active');
+  }
+
+  function closeModal() {
+    if (modal) modal.classList.remove('active');
+  }
+
+  // Auto open if URL has ?admin=1
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('admin') === '1') {
+    openModal();
+  }
+
+  // Triple click trigger on footer copyright
+  let clickCount = 0;
+  let clickTimer = null;
+  if (trigger) {
+    trigger.addEventListener('click', () => {
+      clickCount++;
+      clearTimeout(clickTimer);
+      if (clickCount >= 3) {
+        clickCount = 0;
+        openModal();
+      } else {
+        clickTimer = setTimeout(() => {
+          clickCount = 0;
+        }, 600);
+      }
     });
   }
 
-  if (closeBtn && modal) {
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-  }
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
+  // Save Settings
   if (saveBtn) {
     saveBtn.addEventListener('click', () => {
-      const token = tokenInput.value.trim();
-      const chat = chatInput.value.trim();
+      const gUrl = googleUrlInput?.value.trim() || '';
+      const gDirect = googleFormDirectInput?.value.trim() || '';
+      const token = tgTokenInput?.value.trim() || '';
+      const chat = tgChatInput?.value.trim() || '';
 
+      localStorage.setItem('ws_google_endpoint', gUrl);
+      localStorage.setItem('ws_google_form_url', gDirect);
       localStorage.setItem('tg_bot_token', token);
       localStorage.setItem('tg_chat_id', chat);
-      DEFAULT_TELEGRAM.botToken = token;
-      DEFAULT_TELEGRAM.chatId = chat;
 
-      showToast('Đã lưu cấu hình Telegram thành công!', 'success');
-      modal.classList.remove('active');
+      DEFAULT_CONFIG.googleEndpointUrl = gUrl;
+      DEFAULT_CONFIG.googleFormDirectUrl = gDirect;
+      DEFAULT_CONFIG.tgBotToken = token;
+      DEFAULT_CONFIG.tgChatId = chat;
+
+      showToast('Đã lưu cấu hình Google & Telegram thành công!', 'success');
+      closeModal();
     });
   }
 
+  // Test Connection
   if (testBtn) {
     testBtn.addEventListener('click', async () => {
-      const token = tokenInput.value.trim();
-      const chat = chatInput.value.trim();
+      const gUrl = googleUrlInput?.value.trim() || '';
+      const token = tgTokenInput?.value.trim() || '';
+      const chat = tgChatInput?.value.trim() || '';
 
-      if (!token || !chat) {
-        statusEl.innerHTML = `<span class="text-red-500 font-semibold">Vui lòng nhập đầy đủ Bot Token và Chat ID!</span>`;
-        return;
+      if (statusEl) {
+        statusEl.innerHTML = `<span class="text-sky-400 font-medium">⏳ Đang gửi dữ liệu kiểm tra...</span>`;
       }
 
-      statusEl.innerHTML = `<span class="text-blue-500 font-semibold">Đang gửi tin nhắn thử nghiệm...</span>`;
+      let tgOk = false;
+      let googleOk = false;
 
-      try {
-        const message = `⚡ <b>[TEST] Thử nghiệm kết nối Telegram Bot</b>\n\nHệ thống LDP Workshop Pharmesthetic đã sẵn sàng nhận tin nhắn đăng ký!`;
-        const res = await sendTelegramApi(token, chat, message);
-        if (res.ok) {
-          statusEl.innerHTML = `<span class="text-emerald-600 font-semibold">✓ Kết nối thành công! Kiểm tra tin nhắn trong Telegram của bạn.</span>`;
-          showToast('Tin nhắn thử nghiệm đã được gửi!', 'success');
-        } else {
-          statusEl.innerHTML = `<span class="text-red-500 font-semibold">❌ Lỗi: ${res.description || 'Không thể kết nối Telegram Bot'}</span>`;
+      // Test Telegram
+      if (token && chat) {
+        try {
+          const testMsg = `⚡ <b>[TEST] KIỂM TRA HỆ THỐNG WORKSHOP PHARMESTHETIC</b>\n\nKết nối Telegram hoạt động tốt!`;
+          const res = await sendTelegramApi(token, chat, testMsg);
+          if (res.ok) tgOk = true;
+        } catch (e) {
+          console.warn('Test TG error:', e);
         }
-      } catch (err) {
-        statusEl.innerHTML = `<span class="text-red-500 font-semibold">❌ Lỗi mạng: ${err.message}</span>`;
+      }
+
+      // Test Google Endpoint
+      if (gUrl) {
+        const dummyPayload = {
+          fullName: 'Người Dùng Thử Nghiệm',
+          phone: '0988888888',
+          socialLink: 'facebook.com/test',
+          problem: 'Kiểm tra kết nối Google Form/Sheet',
+          goal: 'Đồng bộ dữ liệu thành công',
+          role: 'Chủ Spa / Thẩm Mỹ Viện',
+          packageType: 'Gói Little Master (15 triệu)',
+          note: 'Dữ liệu test tự động',
+          submittedAt: new Date().toLocaleString('vi-VN'),
+          source: 'Admin Test'
+        };
+        const gRes = await sendToGoogleEndpoint(dummyPayload, gUrl);
+        if (gRes.success) googleOk = true;
+      }
+
+      if (statusEl) {
+        let msg = '';
+        if (tgOk) msg += `<span class="text-emerald-400">✓ Telegram: OK</span> `;
+        else if (token && chat) msg += `<span class="text-rose-400">✕ Telegram: Thất bại</span> `;
+
+        if (googleOk) msg += `<span class="text-emerald-400">✓ Google: Đã gửi</span>`;
+        else if (gUrl) msg += `<span class="text-rose-400">✕ Google: Kiểm tra lại URL</span>`;
+
+        if (!token && !gUrl) msg = `<span class="text-amber-400">Vui lòng nhập ít nhất URL Google hoặc Telegram!</span>`;
+
+        statusEl.innerHTML = msg;
       }
     });
+  }
+}
+
+// ============================================================
+// SEND DATA TO GOOGLE FORM / GOOGLE APPS SCRIPT
+// ============================================================
+async function sendToGoogleEndpoint(payload, customUrl = '') {
+  const endpoint = customUrl || localStorage.getItem('ws_google_endpoint') || DEFAULT_CONFIG.googleEndpointUrl;
+  
+  if (!endpoint) {
+    console.log('📌 Chưa cấu hình Google Endpoint. Kết quả sẽ được gửi qua Telegram.');
+    return { success: false, reason: 'no_endpoint' };
+  }
+
+  try {
+    let targetUrl = endpoint.trim();
+
+    // Trường hợp 1: Link Google Form trực tiếp (docs.google.com/forms)
+    if (targetUrl.includes('docs.google.com/forms')) {
+      if (targetUrl.includes('/viewform')) {
+        targetUrl = targetUrl.replace('/viewform', '/formResponse');
+      } else if (!targetUrl.includes('/formResponse')) {
+        targetUrl = targetUrl.replace(/\/$/, '') + '/formResponse';
+      }
+
+      const formBody = new URLSearchParams();
+      // Google Form nhận URL-encoded parameters
+      formBody.append('fullName', payload.fullName);
+      formBody.append('phone', payload.phone);
+      formBody.append('socialLink', payload.socialLink);
+      formBody.append('problem', payload.problem);
+      formBody.append('goal', payload.goal);
+      formBody.append('role', payload.role);
+      formBody.append('packageType', payload.packageType);
+      formBody.append('note', payload.note);
+      formBody.append('timestamp', payload.submittedAt);
+
+      await fetch(targetUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formBody
+      });
+
+      return { success: true, type: 'google_form' };
+    }
+
+    // Trường hợp 2: Google Apps Script Web App (script.google.com)
+    // Dùng Content-Type text/plain;charset=utf-8 và mode: no-cors để không bị chặn CORS
+    await fetch(targetUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    return { success: true, type: 'apps_script' };
+  } catch (error) {
+    console.error('Lỗi khi gửi kết quả về Google Form / Sheet:', error);
+    return { success: false, error: error.message };
   }
 }
 
@@ -101,7 +252,9 @@ async function sendTelegramApi(token, chatId, text) {
   return await response.json();
 }
 
-// Registration Form Submission Handler
+// ============================================================
+// REGISTRATION FORM SUBMISSION HANDLER
+// ============================================================
 function initFormHandler() {
   const form = document.getElementById('registration-form');
   const submitBtn = document.getElementById('submit-btn');
@@ -141,8 +294,23 @@ function initFormHandler() {
       </svg> Đang xử lý đăng ký...
     `;
 
-    // Construct Telegram Message Payload
     const now = new Date().toLocaleString('vi-VN');
+
+    // 1. Chuẩn bị dữ liệu gửi về Google Form / Google Sheet
+    const registrationPayload = {
+      fullName,
+      phone,
+      socialLink,
+      problem,
+      goal,
+      role,
+      packageType,
+      note,
+      submittedAt: now,
+      source: window.location.href
+    };
+
+    // 2. Chuẩn bị tin nhắn gửi về Telegram Bot
     const telegramMessage = `
 🔥 <b>ĐĂNG KÝ WORKSHOP PHARMESTHETIC MỚI!</b>
 ━━━━━━━━━━━━━━━━━━━━━━
@@ -160,48 +328,80 @@ function initFormHandler() {
 <i>Tin nhắn tự động từ Landing Page Workshop Pharmesthetic</i>
     `.trim();
 
-    const token = localStorage.getItem('tg_bot_token') || DEFAULT_TELEGRAM.botToken;
-    const chat = localStorage.getItem('tg_chat_id') || DEFAULT_TELEGRAM.chatId;
+    const token = localStorage.getItem('tg_bot_token') || DEFAULT_CONFIG.tgBotToken;
+    const chat = localStorage.getItem('tg_chat_id') || DEFAULT_CONFIG.tgChatId;
 
     let isSentToTelegram = false;
+    let isSentToGoogle = false;
 
+    // Gửi song song đến cả Telegram và Google Form / Sheet
+    const promises = [];
+
+    // Gửi Telegram
     if (token && chat) {
-      try {
-        const res = await sendTelegramApi(token, chat, telegramMessage);
-        if (res.ok) {
-          isSentToTelegram = true;
-        } else {
-          console.warn('Telegram Error:', res);
-        }
-      } catch (err) {
-        console.error('Telegram Send Failed:', err);
-      }
-    } else {
-      console.log('Chưa cấu hình Telegram Token/ChatID. Dữ liệu sẽ mô phỏng gửi:', { fullName, phone, role, packageType, note });
+      promises.push(
+        sendTelegramApi(token, chat, telegramMessage)
+          .then(res => {
+            if (res.ok) isSentToTelegram = true;
+            else console.warn('Telegram Error:', res);
+          })
+          .catch(err => console.error('Telegram Send Failed:', err))
+      );
     }
 
-    // Reset Form & Show Success Modal / Toast
+    // Gửi Google Form / Google Apps Script
+    promises.push(
+      sendToGoogleEndpoint(registrationPayload)
+        .then(res => {
+          if (res.success) isSentToGoogle = true;
+        })
+        .catch(err => console.error('Google Send Failed:', err))
+    );
+
+    await Promise.allSettled(promises);
+
+    // Reset Form & Show Success Modal
     setTimeout(() => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = `Đăng Ký Tham Gia Ngay ✨`;
       form.reset();
 
-      showSuccessModal(fullName, phone, packageType, isSentToTelegram);
-    }, 800);
+      showSuccessModal(fullName, phone, packageType, isSentToTelegram, isSentToGoogle);
+    }, 600);
   });
 }
 
-function showSuccessModal(name, phone, packageType, sentToTg) {
+function showSuccessModal(name, phone, packageType, sentToTg, sentToGoogle) {
   const modal = document.getElementById('success-modal');
   const detailsEl = document.getElementById('success-details');
+  const linkContainer = document.getElementById('google-form-link-container');
+  const formDirectUrl = localStorage.getItem('ws_google_form_url') || DEFAULT_CONFIG.googleFormDirectUrl;
 
   if (detailsEl) {
     detailsEl.innerHTML = `
       <p>Cảm ơn <strong>${name}</strong> (${phone})!</p>
-      <p class="mt-1">Bạn đã đăng ký tham gia với lựa chọn: <span class="text-teal-600 font-bold">${packageType}</span></p>
-      <p class="mt-2 text-xs text-slate-500">Ban tổ chức Pharmesthetic sẽ liên hệ xác nhận vé tham dự trong thời gian sớm nhất.</p>
-      <p class="mt-2 text-xs text-emerald-600 font-medium">✓ Thông tin đăng ký đã được ghi nhận thành công!</p>
+      <p class="mt-1">Bạn đã đăng ký tham gia với lựa chọn: <span class="text-sky-400 font-bold">${packageType}</span></p>
+      <p class="mt-2 text-xs text-slate-400">Ban tổ chức Pharmesthetic sẽ liên hệ xác nhận vé mời tham dự trong thời gian sớm nhất.</p>
+      <p class="mt-2 text-xs text-emerald-400 font-medium">✓ Dữ liệu đăng ký đã được ghi nhận thành công và gửi tới Ban Tổ Chức!</p>
     `;
+  }
+
+  // Nếu có link Google Form trực tiếp thì hiển thị nút dẫn sang Google Form
+  if (linkContainer) {
+    if (formDirectUrl) {
+      linkContainer.innerHTML = `
+        <a href="${formDirectUrl}" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-400 hover:text-sky-300 text-xs font-bold border border-slate-700 transition">
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+          <span>Mở xem Biểu mẫu Google Form Workshop</span>
+        </a>
+      `;
+      linkContainer.classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    } else {
+      linkContainer.classList.add('hidden');
+      linkContainer.innerHTML = '';
+    }
   }
 
   if (modal) {
