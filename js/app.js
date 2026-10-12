@@ -203,6 +203,7 @@ async function sendToGoogleEndpoint(payload, customUrl = '') {
       formBody.append('problem', payload.problem);
       formBody.append('goal', payload.goal);
       formBody.append('role', payload.role);
+      formBody.append('referrer', payload.referrer);
       formBody.append('packageType', payload.packageType);
       formBody.append('note', payload.note);
       formBody.append('timestamp', payload.submittedAt);
@@ -270,9 +271,10 @@ function initFormHandler() {
     const problem = document.getElementById('form-problem')?.value.trim() || '';
     const goal = document.getElementById('form-goal')?.value.trim() || '';
     const role = document.getElementById('form-role')?.value.trim() || '';
+    const referrer = document.getElementById('form-referrer')?.value.trim() || '';
     const note = document.getElementById('form-note')?.value.trim() || '';
 
-    if (!fullName || !phone || !socialLink || !problem || !goal || !role || !note) {
+    if (!fullName || !phone || !socialLink || !problem || !goal || !role || !referrer || !note) {
       showToast('Vui lòng điền đầy đủ tất cả các trường thông tin bắt buộc!', 'error');
       return;
     }
@@ -303,6 +305,7 @@ function initFormHandler() {
       problem,
       goal,
       role,
+      referrer,
       packageType: 'Đăng ký tham gia Workshop',
       note,
       submittedAt: now,
@@ -319,6 +322,7 @@ function initFormHandler() {
 ⚠️ <b>Vấn đề hiện tại:</b> ${problem}
 🎯 <b>Mong muốn cải thiện:</b> ${goal}
 💼 <b>Mô hình:</b> ${role}
+🤝 <b>Biết đến từ:</b> <b>${referrer}</b>
 📝 <b>Ghi chú:</b> ${note}
 ⏰ <b>Thời gian ĐK:</b> ${now}
 📍 <b>Sự kiện:</b> Workshop Khởi nghiệp Pharmesthetic (21/10)

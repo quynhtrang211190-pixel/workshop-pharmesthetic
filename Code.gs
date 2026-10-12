@@ -81,7 +81,7 @@ function handleWorkshopRegistration(data) {
   const problem = data.problem || 'Chưa nhập';
   const goal = data.goal || 'Chưa nhập';
   const role = data.role || 'Chưa chọn';
-  const packageType = data.packageType || data.package || 'Đăng ký tham dự Workshop (Miễn Phí)';
+  const referrer = data.referrer || data.referral || 'Không có';
   const note = data.note || 'Không có';
   const source = data.source || 'Landing Page Workshop Pharmesthetic';
 
@@ -120,7 +120,7 @@ function handleWorkshopRegistration(data) {
       '1. Vấn đề hiện tại của bạn',
       '2. Mong muốn cải thiện',
       'Mô hình kinh doanh',
-      'Gói giải pháp quan tâm',
+      'Người giới thiệu',
       'Ghi chú thêm',
       'Nguồn đăng ký'
     ];
@@ -143,6 +143,18 @@ function handleWorkshopRegistration(data) {
     sheet.setColumnWidth(3, 140); // SĐT
     sheet.setColumnWidth(5, 260); // Vấn đề
     sheet.setColumnWidth(6, 260); // Mong muốn
+    sheet.setColumnWidth(8, 180); // Người giới thiệu
+  } else {
+    // Nếu sheet đã có, tự động cập nhật tiêu đề cột 8 thành 'Người giới thiệu' nếu trước đó là 'Gói giải pháp'
+    try {
+      const lastCol = Math.max(sheet.getLastColumn(), 1);
+      const headerRow = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+      if (headerRow[7] && (headerRow[7].includes('Gói') || headerRow[7].includes('gói'))) {
+        sheet.getRange(1, 8).setValue('Người giới thiệu');
+      }
+    } catch (eHeader) {
+      Logger.log("Lỗi check header: " + eHeader.message);
+    }
   }
 
   const now = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
@@ -156,13 +168,13 @@ function handleWorkshopRegistration(data) {
     problem,
     goal,
     role,
-    packageType,
+    referrer,
     note,
     source
   ]);
 
   // Gửi thông báo đến Telegram Bot
-  sendTelegramNotification(fullName, phone, socialLink, problem, goal, role, packageType, note, now);
+  sendTelegramNotification(fullName, phone, socialLink, problem, goal, role, referrer, note, now);
 
   return { 
     success: true, 
@@ -173,7 +185,7 @@ function handleWorkshopRegistration(data) {
 /**
  * Gửi thông báo đến Telegram Bot
  */
-function sendTelegramNotification(name, phone, social, problem, goal, role, pkg, note, time) {
+function sendTelegramNotification(name, phone, social, problem, goal, role, referrer, note, time) {
   try {
     const token = CONFIG.TELEGRAM_BOT_TOKEN;
     const chatId = CONFIG.TELEGRAM_CHAT_ID;
@@ -187,7 +199,7 @@ function sendTelegramNotification(name, phone, social, problem, goal, role, pkg,
       `⚠️ <b>Vấn đề hiện tại:</b> ${problem}\n` +
       `🎯 <b>Mong muốn cải thiện:</b> ${goal}\n` +
       `💼 <b>Mô hình:</b> ${role}\n` +
-      `📦 <b>Gói quan tâm:</b> <b>${pkg}</b>\n` +
+      `🤝 <b>Biết đến từ:</b> <b>${referrer}</b>\n` +
       `📝 <b>Ghi chú:</b> ${note}\n` +
       `⏰ <b>Thời gian ĐK:</b> ${time}\n` +
       `📍 <b>Sự kiện:</b> Workshop Khởi nghiệp Pharmesthetic (21/10)\n` +
