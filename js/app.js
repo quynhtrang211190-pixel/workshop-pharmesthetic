@@ -270,10 +270,9 @@ function initFormHandler() {
     const problem = document.getElementById('form-problem')?.value.trim() || '';
     const goal = document.getElementById('form-goal')?.value.trim() || '';
     const role = document.getElementById('form-role')?.value.trim() || '';
-    const packageType = document.getElementById('form-package')?.value.trim() || '';
     const note = document.getElementById('form-note')?.value.trim() || '';
 
-    if (!fullName || !phone || !socialLink || !problem || !goal || !role || !packageType || !note) {
+    if (!fullName || !phone || !socialLink || !problem || !goal || !role || !note) {
       showToast('Vui lòng điền đầy đủ tất cả các trường thông tin bắt buộc!', 'error');
       return;
     }
@@ -304,7 +303,7 @@ function initFormHandler() {
       problem,
       goal,
       role,
-      packageType,
+      packageType: 'Đăng ký tham gia Workshop',
       note,
       submittedAt: now,
       source: window.location.href
@@ -320,7 +319,6 @@ function initFormHandler() {
 ⚠️ <b>Vấn đề hiện tại:</b> ${problem}
 🎯 <b>Mong muốn cải thiện:</b> ${goal}
 💼 <b>Mô hình:</b> ${role}
-📦 <b>Gói quan tâm:</b> <b>${packageType}</b>
 📝 <b>Ghi chú:</b> ${note}
 ⏰ <b>Thời gian ĐK:</b> ${now}
 📍 <b>Sự kiện:</b> Workshop Khởi nghiệp Pharmesthetic (21/10)
@@ -366,12 +364,12 @@ function initFormHandler() {
       submitBtn.innerHTML = `Đăng Ký Tham Gia Ngay ✨`;
       form.reset();
 
-      showSuccessModal(fullName, phone, packageType, isSentToTelegram, isSentToGoogle);
+      showSuccessModal(fullName, phone, isSentToTelegram, isSentToGoogle);
     }, 600);
   });
 }
 
-function showSuccessModal(name, phone, packageType, sentToTg, sentToGoogle) {
+function showSuccessModal(name, phone, sentToTg, sentToGoogle) {
   const modal = document.getElementById('success-modal');
   const detailsEl = document.getElementById('success-details');
   const linkContainer = document.getElementById('google-form-link-container');
@@ -380,7 +378,7 @@ function showSuccessModal(name, phone, packageType, sentToTg, sentToGoogle) {
   if (detailsEl) {
     detailsEl.innerHTML = `
       <p>Cảm ơn <strong>${name}</strong> (${phone})!</p>
-      <p class="mt-1">Bạn đã đăng ký tham gia với lựa chọn: <span class="text-sky-400 font-bold">${packageType}</span></p>
+      <p class="mt-1">Bạn đã đăng ký tham gia <strong>Workshop Khởi Nghiệp Pharmesthetic</strong> thành công.</p>
       <p class="mt-2 text-xs text-slate-400">Ban tổ chức Pharmesthetic sẽ liên hệ xác nhận vé mời tham dự trong thời gian sớm nhất.</p>
       <p class="mt-2 text-xs text-emerald-400 font-medium">✓ Dữ liệu đăng ký đã được ghi nhận thành công và gửi tới Ban Tổ Chức!</p>
     `;
@@ -417,22 +415,16 @@ function closeSuccessModal() {
 // Package Selection Interactive Handler
 function initPackageSelection() {
   const cards = document.querySelectorAll('.package-card');
-  const packageSelect = document.getElementById('form-package');
 
   cards.forEach(card => {
     card.addEventListener('click', () => {
       cards.forEach(c => c.classList.remove('selected'));
       card.classList.add('selected');
 
-      const pkgName = card.dataset.package;
-      if (packageSelect && pkgName) {
-        packageSelect.value = pkgName;
-
-        // Smooth scroll to form if clicked from pricing section
-        const formElement = document.getElementById('register');
-        if (formElement) {
-          formElement.scrollIntoView({ behavior: 'smooth' });
-        }
+      // Smooth scroll to form if clicked from pricing section
+      const formElement = document.getElementById('register');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
