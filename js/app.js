@@ -264,17 +264,17 @@ function initFormHandler() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const fullName = document.getElementById('form-name').value.trim();
-    const phone = document.getElementById('form-phone').value.trim();
-    const socialLink = document.getElementById('form-social')?.value.trim() || 'Không cung cấp';
-    const problem = document.getElementById('form-problem')?.value.trim() || 'Chưa nhập';
-    const goal = document.getElementById('form-goal')?.value.trim() || 'Chưa nhập';
-    const role = document.getElementById('form-role').value;
-    const packageType = document.getElementById('form-package').value;
-    const note = document.getElementById('form-note')?.value.trim() || 'Không có';
+    const fullName = document.getElementById('form-name')?.value.trim() || '';
+    const phone = document.getElementById('form-phone')?.value.trim() || '';
+    const socialLink = document.getElementById('form-social')?.value.trim() || '';
+    const problem = document.getElementById('form-problem')?.value.trim() || '';
+    const goal = document.getElementById('form-goal')?.value.trim() || '';
+    const role = document.getElementById('form-role')?.value.trim() || '';
+    const packageType = document.getElementById('form-package')?.value.trim() || '';
+    const note = document.getElementById('form-note')?.value.trim() || '';
 
-    if (!fullName || !phone || !problem || !goal) {
-      showToast('Vui lòng điền đầy đủ Họ tên, Số điện thoại và 2 câu hỏi bắt buộc!', 'error');
+    if (!fullName || !phone || !socialLink || !problem || !goal || !role || !packageType || !note) {
+      showToast('Vui lòng điền đầy đủ tất cả các trường thông tin bắt buộc!', 'error');
       return;
     }
 
