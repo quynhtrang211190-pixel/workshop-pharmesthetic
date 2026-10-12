@@ -19,7 +19,7 @@ const DEFAULT_CONFIG = {
 
   // 2. Google Form / Google Apps Script Webhook URL
   // Dán Web App URL triển khai từ Code.gs hoặc link Google Form
-  googleEndpointUrl: localStorage.getItem('ws_google_endpoint') || '',
+  googleEndpointUrl: localStorage.getItem('ws_google_endpoint') || 'https://script.google.com/macros/s/AKfycbzpuUSzh9zlIVw2M5ABhJ0mpu2MW8M17X0wx9Vuf6xL-zU3pOx1jnbNLfE9kjyhkws6_g/exec',
 
   // 3. Link Google Form trực tiếp (Nếu muốn hiển thị nút mở biểu mẫu sau khi đăng ký)
   googleFormDirectUrl: localStorage.getItem('ws_google_form_url') || ''
