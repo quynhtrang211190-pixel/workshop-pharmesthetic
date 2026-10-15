@@ -82,6 +82,7 @@ function handleWorkshopRegistration(data) {
   const goal = data.goal || 'Chưa nhập';
   const role = data.role || 'Chưa chọn';
   const referrer = data.referrer || data.referral || 'Không có';
+  const packageType = data.packageType || 'Đăng ký tham gia Workshop';
   const note = data.note || 'Không có';
   const source = data.source || 'Landing Page Workshop Pharmesthetic';
 
@@ -120,9 +121,10 @@ function handleWorkshopRegistration(data) {
       '1. Vấn đề hiện tại của bạn',
       '2. Mong muốn cải thiện',
       'Mô hình kinh doanh',
-      'Người giới thiệu',
+      'Gói giải pháp quan tâm',
       'Ghi chú thêm',
-      'Nguồn đăng ký'
+      'Nguồn đăng ký',
+      'Khách từ ai'
     ];
     sheet.appendRow(headers);
     
@@ -145,12 +147,10 @@ function handleWorkshopRegistration(data) {
     sheet.setColumnWidth(6, 260); // Mong muốn
     sheet.setColumnWidth(8, 180); // Người giới thiệu
   } else {
-    // Nếu sheet đã có, tự động cập nhật tiêu đề cột 8 thành 'Người giới thiệu' nếu trước đó là 'Gói giải pháp'
+    // Đảm bảo cột K (cột 11) có tiêu đề 'Khách từ ai'
     try {
-      const lastCol = Math.max(sheet.getLastColumn(), 1);
-      const headerRow = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
-      if (headerRow[7] && (headerRow[7].includes('Gói') || headerRow[7].includes('gói'))) {
-        sheet.getRange(1, 8).setValue('Người giới thiệu');
+      if (!sheet.getRange(1, 11).getValue()) {
+        sheet.getRange(1, 11).setValue('Khách từ ai');
       }
     } catch (eHeader) {
       Logger.log("Lỗi check header: " + eHeader.message);
@@ -168,9 +168,10 @@ function handleWorkshopRegistration(data) {
     problem,
     goal,
     role,
-    referrer,
+    packageType,
     note,
-    source
+    source,
+    referrer // Cột K: Khách từ ai
   ]);
 
   // Gửi thông báo đến Telegram Bot
