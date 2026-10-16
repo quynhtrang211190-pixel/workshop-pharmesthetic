@@ -1,4 +1,4 @@
-// Application JS for Workshop Khởi nghiệp Pharmesthetic
+// Application JS for Workshop Phát triển kinh doanh cùng Pharmesthetic
 
 document.addEventListener('DOMContentLoaded', () => {
   initAdminConfig();
@@ -325,7 +325,7 @@ function initFormHandler() {
 🤝 <b>Biết đến từ:</b> <b>${referrer}</b>
 📝 <b>Ghi chú:</b> ${note}
 ⏰ <b>Thời gian ĐK:</b> ${now}
-📍 <b>Sự kiện:</b> Workshop Khởi nghiệp Pharmesthetic (21/10)
+📍 <b>Sự kiện:</b> Workshop Phát triển kinh doanh cùng Pharmesthetic (21/10)
 ━━━━━━━━━━━━━━━━━━━━━━
 <i>Tin nhắn tự động từ Landing Page Workshop Pharmesthetic</i>
     `.trim();
@@ -382,7 +382,7 @@ function showSuccessModal(name, phone, sentToTg, sentToGoogle) {
   if (detailsEl) {
     detailsEl.innerHTML = `
       <p>Cảm ơn <strong>${name}</strong> (${phone})!</p>
-      <p class="mt-1">Bạn đã đăng ký tham gia <strong>Workshop Khởi Nghiệp Pharmesthetic</strong> thành công.</p>
+      <p class="mt-1">Bạn đã đăng ký tham gia <strong>Workshop Phát Triển Kinh Doanh cùng Pharmesthetic</strong> thành công.</p>
       <p class="mt-2 text-xs text-slate-400">Ban tổ chức Pharmesthetic sẽ liên hệ xác nhận vé mời tham dự trong thời gian sớm nhất.</p>
       <p class="mt-2 text-xs text-emerald-400 font-medium">✓ Dữ liệu đăng ký đã được ghi nhận thành công và gửi tới Ban Tổ Chức!</p>
     `;

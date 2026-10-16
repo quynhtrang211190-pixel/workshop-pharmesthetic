@@ -1,5 +1,5 @@
 // ==============================================================================
-// WORKSHOP KHỞI NGHIỆP PHARMESTHETIC - GOOGLE APPS SCRIPT BACKEND
+// WORKSHOP PHÁT TRIỂN KINH DOANH CÙNG PHARMESTHETIC - GOOGLE APPS SCRIPT BACKEND
 // Tự động ghi nhận thông tin khách đăng ký vào Google Sheet & báo Telegram
 // ==============================================================================
 // HƯỚNG DẪN CÀI ĐẶT 1 PHÚT:
@@ -203,7 +203,7 @@ function sendTelegramNotification(name, phone, social, problem, goal, role, refe
       `🤝 <b>Biết đến từ:</b> <b>${referrer}</b>\n` +
       `📝 <b>Ghi chú:</b> ${note}\n` +
       `⏰ <b>Thời gian ĐK:</b> ${time}\n` +
-      `📍 <b>Sự kiện:</b> Workshop Khởi nghiệp Pharmesthetic (21/10)\n` +
+      `📍 <b>Sự kiện:</b> Workshop Phát triển kinh doanh cùng Pharmesthetic (21/10)\n` +
       `━━━━━━━━━━━━━━━━━━━━━━\n` +
       `<i>✓ Đã đồng bộ tự động vào Google Sheet</i>`;
 
